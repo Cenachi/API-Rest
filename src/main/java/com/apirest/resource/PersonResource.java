@@ -40,14 +40,12 @@ public class PersonResource {
     public ResponseEntity<List<Person>> getAll() {
         List<Person> persons = new ArrayList<Person>();
         persons = personRepository.findAll();
-
         return new ResponseEntity<>(persons, HttpStatus.OK);
     }
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<Optional<Person>> getById(@PathVariable Integer id) {
         Optional<Person> person;
-
         try {
             person = personRepository.findById(id);
             return new ResponseEntity<Optional<Person>>(person, HttpStatus.OK);
@@ -77,7 +75,5 @@ public class PersonResource {
             Person personoUpdated = personRepository.save(person);
             return ResponseEntity.ok().body(personoUpdated);
         }).orElse(ResponseEntity.notFound().build());
-
     }
-
 }
